@@ -5,7 +5,7 @@ This Terraform configuration can be used to deploy Ubuntu LTS instances to VMWar
 
 .Prerequisites
 
-* Download the Ubuntu cloud image https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova
+* Download the https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova[Ubuntu 20.04 Server cloud image]
 * Upload the OVA image to your vSphere environment and convert it to template.
 
 IMPORTANT: Do not power on the virtual machine prior to converting to template. This will ensure cloud-init runs at first boot.
@@ -69,4 +69,4 @@ EOF
 * Run terraform [init, plan, apply] as usual.
 
 .References
-* https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+* https://cloudinit.readthedocs.io/en/latest/topics/examples.html[Cloud init example configuration]
