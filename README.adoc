@@ -1,5 +1,5 @@
 
-= Deploy Ubuntu 20.04 LTS (cloud image) to Vsphere with Terraform
+= Deploy Ubuntu 20.04 LTS (cloud image) to vSphere with Terraform
 
 This Terraform configuration can be used to deploy Ubuntu LTS instances to VMWare vSphere environment from an Ubuntu Cloud Image template. It includes a cloud-init file template that can be further customized to satisfy your requirements.
 
