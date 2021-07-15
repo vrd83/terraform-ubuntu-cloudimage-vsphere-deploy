@@ -14,11 +14,11 @@ IMPORTANT: Do not power on the virtual machine prior to converting to template. 
 
 * Configure a Terraform backend if required.
 * Review the main.tf, variables.tf and templates/userdata.yml files to customize the configuration to suite your needs.
-* Create a variables.tf file to enter your vSphere environment details and virtual machine settings. An example has been included below for convenience.
+* Create a terraform.tfvars file to enter your vSphere environment details and virtual machine settings. An example has been included below for convenience.
 
 [source, bash]
 ----
-cat << EOF > variables.tf
+cat << EOF > terraform.tfvars
 # vCenter connectivity
 vsphere_server   = "192.168.0.1"
 vsphere_user     = "administrator@vsphere.local"
