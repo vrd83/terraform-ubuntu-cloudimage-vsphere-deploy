@@ -67,3 +67,6 @@ EOF
 ----
 
 * Run terraform [init, plan, apply] as usual.
+
+.References
+* https://cloudinit.readthedocs.io/en/latest/topics/examples.html
