@@ -1,0 +1,69 @@
+
+= Deploy Ubuntu 20.04 LTS (cloud image) to Vsphere with Terraform
+
+This Terraform configuration can be used to deploy Ubuntu LTS instances to VMWare vSphere environment from an Ubuntu Cloud Image template. It includes a cloud-init file template that can be further customized to satisfy your requirements.
+
+.Prerequisites
+
+* Download the Ubuntu cloud image https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.ova
+* Upload the OVA image to your vSphere environment and convert it to template.
+
+IMPORTANT: Do not power on the virtual machine prior to converting to template. This will ensure cloud-init runs at first boot.
+
+.Instructions
+
+* Configure a Terraform backend if required.
+* Review the main.tf, variables.tf and templates/userdata.yml files to customize the configuration to suite your needs.
+* Create a variables.tf file to enter your vSphere environment details and virtual machine settings. An example has been included below for convenience.
+
+[source, bash]
+----
+cat << EOF > variables.tf
+# vCenter connectivity
+vsphere_server   = "192.168.0.1"
+vsphere_user     = "administrator@vsphere.local"
+vsphere_password = "securepassword"
+
+# Deployment options
+vsphere_datacenter = "example-datacenter01"
+vsphere_datastore  = "example-datastore01"
+vsphere_cluster    = "example-cluster01"
+vsphere_template_name = "ubuntu-focal-20.04-cloudimg-template"
+
+# Virtual Machine(s) configuration
+vm_settings = {
+  dev-vm-name-01 = {
+    domain       = "example-domain.com"
+    netportgroup = "dev"
+    ip           = "192.168.10.10"
+    subnet       = 24
+    gw           = "192.168.10.1"
+    nameservers  = ["192.168.10.100", "192.168.10.200"]
+    cpus         = 2
+    memory       = 4096
+    disk         = 100
+    thin         = true
+    folder       = "dev-ubuntu-vms"
+    user         = "example-user"
+    sshkey       = "ssh-rsa AAAAAAAAAAAAAA"
+  }
+  prod-vm-name-01 = {
+    domain       = "example-domain.com"
+    netportgroup = "prod"
+    ip           = "192.168.20.11"
+    subnet       = 24
+    gw           = "192.168.20.1"
+    nameservers  = ["192.168.20.100", "192.168.20.200"]
+    cpus         = 4
+    memory       = 8192
+    disk         = 100
+    thin         = true
+    folder       = "prod-ubuntu-vms"
+    user         = "example-user"
+    sshkey       = "ssh-rsa AAAAAAAAAAAAAA"
+  }
+}
+EOF
+----
+
+* Run terraform [init, plan, apply] as usual.

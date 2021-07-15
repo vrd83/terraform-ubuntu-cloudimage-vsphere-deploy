@@ -1,0 +1,32 @@
+#cloud-config
+users:
+  - name: ${username}
+    lock_passwd: true
+    ssh-authorized-keys:
+      - ${ssh_public_key}
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    groups: sudo
+    shell: /bin/bash
+
+write_files:
+- path: /etc/netplan/50-cloud-init.yaml
+  content: |
+    network:
+      version: 2
+      ethernets:
+        ens192:
+          addresses:
+            - ${ip_address}/${netmask}
+          gateway4: ${gateway}
+          nameservers:
+            addresses: ${nameservers}
+- path: /etc/sysctl.d/10-disable-ipv6.conf
+  permissions: 0644
+  owner: root
+  content: |
+    net.ipv6.conf.eth0.disable_ipv6 = 1
+
+runcmd:
+- netplan apply
+- apt update
+- apt upgrade -y
