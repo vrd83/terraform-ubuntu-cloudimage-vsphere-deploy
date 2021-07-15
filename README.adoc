@@ -20,7 +20,7 @@ IMPORTANT: Do not power on the virtual machine prior to converting to template. 
 ----
 cat << EOF > terraform.tfvars
 # vCenter connectivity
-vsphere_server   = "192.168.0.1"
+vsphere_server   = "192.168.1.10"
 vsphere_user     = "administrator@vsphere.local"
 vsphere_password = "securepassword"
 
@@ -38,7 +38,7 @@ vm_settings = {
     ip           = "192.168.10.10"
     subnet       = 24
     gw           = "192.168.10.1"
-    nameservers  = ["192.168.10.100", "192.168.10.200"]
+    nameservers  = ["192.168.1.51", "192.168.1.52"]
     cpus         = 2
     memory       = 4096
     disk         = 100
@@ -53,7 +53,7 @@ vm_settings = {
     ip           = "192.168.20.11"
     subnet       = 24
     gw           = "192.168.20.1"
-    nameservers  = ["192.168.20.100", "192.168.20.200"]
+    nameservers  = ["192.168.1.51", "192.168.1.52"]
     cpus         = 4
     memory       = 8192
     disk         = 100
